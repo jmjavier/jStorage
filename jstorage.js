@@ -379,8 +379,9 @@
      *
      * @param {Array|String} keys Array of key names or a key
      * @param {String} action What happened with the value (updated, deleted, flushed)
+     * @param {String} origin Where the fireObserver call came from
      */
-    function _fireObservers(keys, action) {
+    function _fireObservers(keys, action, origin) {
         keys = [].concat(keys || []);
 
         var i, j, len, jlen;
@@ -397,12 +398,12 @@
         for (i = 0, len = keys.length; i < len; i++) {
             if (_observers[keys[i]]) {
                 for (j = 0, jlen = _observers[keys[i]].length; j < jlen; j++) {
-                    _observers[keys[i]][j](keys[i], action);
+                    _observers[keys[i]][j](keys[i], action, origin);
                 }
             }
             if (_observers['*']) {
                 for (j = 0, jlen = _observers['*'].length; j < jlen; j++) {
-                    _observers['*'][j](keys[i], action);
+                    _observers['*'][j](keys[i], action, origin);
                 }
             }
         }
@@ -723,7 +724,7 @@
 
             this.setTTL(key, options.TTL || 0); // also handles saving and _publishChange
 
-            _fireObservers(key, 'updated');
+            _fireObservers(key, 'updated', 'set');
             return value;
         },
 
