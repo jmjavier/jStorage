@@ -1,6 +1,6 @@
 {
   "name": "jStorage",
-  "version": "0.4.16",
+  "version": "0.4.17",
   "description": "jStorage is a cross-browser key-value store database to store data locally in the browser ",
   "keywords": [
     "jStorage"
