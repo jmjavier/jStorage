@@ -184,7 +184,11 @@
             }
         }
 
-        if (localStorageReallyWorks) {
+        if (sessionStorage in window) {
+          _storage_service = window.sessionStorage;
+          _backend = 'sessionStorage';
+          _observer_update = _storage_service.jStorage_update;  
+        } else if (localStorageReallyWorks) {
             try {
                 if (window.localStorage) {
                     _storage_service = window.localStorage;
@@ -243,7 +247,7 @@
                 return;
             }
         }
-
+    
         // Load data from storage
         _load_storage();
 
@@ -265,6 +269,7 @@
             }, false);
         }
     }
+
 
     /**
      * Reload data from storage when needed
