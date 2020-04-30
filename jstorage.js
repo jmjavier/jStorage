@@ -42,7 +42,7 @@
 
     var
     /* jStorage version */
-        JSTORAGE_VERSION = '0.4.12',
+        JSTORAGE_VERSION = '0.4.14',
 
         /* detect a dollar object or create one if not found */
         $ = window.jQuery || window.$ || (window.$ = {}),
@@ -767,7 +767,7 @@
 
                 _save();
                 _publishChange();
-                _fireObservers(key, 'deleted');
+                _fireObservers(key, 'deleted', 'delete');
                 return true;
             }
             return false;
