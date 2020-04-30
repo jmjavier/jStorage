@@ -187,7 +187,7 @@
         if ('sessionStorage' in window) {
           _storage_service = window.sessionStorage;
           _backend = 'sessionStorage';
-          _observer_update = _storage_service.jStorage_update;  
+          _observer_update = _storage_service.jStorage_update;
         } else if (localStorageReallyWorks) {
             try {
                 if (window.localStorage) {
@@ -303,7 +303,7 @@
      * Sets up a storage change observer
      */
     function _setupObserver() {
-        if (_backend == 'localStorage' || _backend == 'globalStorage') {
+        if (_backend == 'sessionStorage' || _backend == 'localStorage' || _backend == 'globalStorage') {
             if ('addEventListener' in window) {
                 window.addEventListener('storage', _storageObserver, false);
             } else {
@@ -324,7 +324,7 @@
         clearTimeout(_observer_timeout);
         _observer_timeout = setTimeout(function() {
 
-            if (_backend == 'localStorage' || _backend == 'globalStorage') {
+            if (_backend == 'sessionStorage' || _backend == 'localStorage' || _backend == 'globalStorage') {
                 updateTime = _storage_service.jStorage_update;
             } else if (_backend == 'userDataBehavior') {
                 _storage_elm.load('jStorage');
@@ -420,7 +420,7 @@
     function _publishChange() {
         var updateTime = (+new Date()).toString();
 
-        if (_backend == 'localStorage' || _backend == 'globalStorage') {
+        if (_backend == 'sessionStorage' || _backend == 'localStorage' || _backend == 'globalStorage') {
             try {
                 _storage_service.jStorage_update = updateTime;
             } catch (E8) {
