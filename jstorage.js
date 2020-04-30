@@ -184,7 +184,7 @@
             }
         }
 
-        if (sessionStorage in window) {
+        if ('sessionStorage' in window) {
           _storage_service = window.sessionStorage;
           _backend = 'sessionStorage';
           _observer_update = _storage_service.jStorage_update;  
